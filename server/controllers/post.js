@@ -54,6 +54,8 @@ const getPost = async (req, res) => {
   console.log(`get post with id ${req.params.id}`);
   try {
     const post = await Post.findOne({ _id: req.params.id });
+    if (!post)
+      return res.status(404).json({ error: `No post with id: ${req.body.id}` });
     res.status(200).json({ data: post });
   } catch (error) {
     res.status(500).json({ error });
