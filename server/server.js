@@ -7,6 +7,9 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const app = express();
 
+// Routers
+const authRouter = require('./routes/auth');
+
 // passport config
 require('./config/passport')(passport);
 
@@ -22,7 +25,11 @@ app.use(
   }),
 );
 
-// Passport middleware
+/*
+ **********************************
+ * Middlewares
+ ***********************************
+ */
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -33,7 +40,27 @@ app.use(express.urlencoded({ extended: false }));
 // To prevent cors error
 app.use(cors());
 
-app.use('/auth', require('./routes/auth'));
+/*
+ **********************************
+ * Routes
+ ***********************************
+ */
+app.use('/auth', authRouter);
+
+// 404
+app.use((req, res, next, error) => {
+  res.status(404).json({
+    error: true,
+    details: error,
+  });
+});
+
+app.use((error, req, res, next) => {
+  res.status(error.code || 500).json({
+    error: true,
+    details: error,
+  });
+});
 
 //listen
 app.listen(8000, () => {

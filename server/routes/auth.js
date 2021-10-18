@@ -1,5 +1,6 @@
 const express = require('express');
 const passport = require('passport');
+const User = require('../models/User');
 
 const router = express.Router();
 
@@ -30,6 +31,20 @@ router.get(
 router.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');
+});
+
+router.get('/usersList', function (req, res) {
+  console.log('In all users route');
+
+  User.find({}, function (err, users) {
+    var userMap = {};
+
+    users.forEach(function (user) {
+      userMap[user._id] = user;
+    });
+
+    res.send(userMap);
+  });
 });
 
 module.exports = router;
