@@ -8,12 +8,7 @@ const {
   deleteMeeting,
 } = require('../controllers/meeting');
 
-router.route('/').get(getAllMeetings);
-router
-  .route('/:id')
-  .get(getMeeting)
-  .post(addMeeting)
-  .patch(updateMeeting)
-  .delete(deleteMeeting);
+router.route('/').get(getAllMeetings).post(addMeeting);
+router.route('/:id').get(getMeeting).patch(updateMeeting).delete(deleteMeeting);
 
 module.exports = router;
