@@ -23,8 +23,8 @@ const getClassroom = async (req, res) => {
 
 const addClassroom = async (req, res) => {
   try {
-    const newPost = await Classroom.create(req.body);
-    res.status(201).json({ data: newPost });
+    const newClassroom = await Classroom.create(req.body);
+    res.status(201).json({ data: newClassroom });
   } catch (error) {
     res.status(500).json({ error });
   }
