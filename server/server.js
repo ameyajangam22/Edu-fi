@@ -9,6 +9,10 @@ const app = express();
 
 // Routers
 const authRouter = require('./routes/auth');
+const userRouter = require('./routes/user');
+const postRouter = require('./routes/post');
+const meetingRouter = require('./routes/meeting');
+const classroomRouter = require('./routes/classroom');
 
 // passport config
 require('./config/passport')(passport);
@@ -46,6 +50,10 @@ app.use(cors());
  ***********************************
  */
 app.use('/auth', authRouter);
+app.use('/users', userRouter);
+app.use('/classroom', classroomRouter);
+app.use('/post', postRouter);
+app.use('/meeting', meetingRouter);
 
 // 404
 app.use((req, res, next, error) => {
@@ -64,5 +72,5 @@ app.use((error, req, res, next) => {
 
 //listen
 app.listen(8000, () => {
-  console.log('Server up and running');
+  console.log('Server up and running at port 8000...');
 });
