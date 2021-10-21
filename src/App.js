@@ -1,8 +1,9 @@
-
+import Login from "./pages/Login";
+import "./index.css"
 function App() {
   return (
-    <div className="App">
-      <h1 className="bg-blue-500 text-white">Pritam Pritam Pritam</h1>
+    <div className="pattern min-h-screen">
+    <Login/>
     </div>
   );
 }
